@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dadaplayer</title>
+</head>
+<body>
+
+<audio id="audioPlayer" controls autoplay></audio>
+
+<script>
+    // List of MP3 files
+    const mp3Files = [];
+    for (let i = 0; i <= 998; i++) {
+        mp3Files.push(`audiu/audio/${i}.mp3`); // Replace "file1.mp3" with actual file names if needed
+    }
+
+    // Shuffle the MP3 files
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    shuffleArray(mp3Files);
+
+    const audioPlayer = document.getElementById('audioPlayer');
+    let currentIndex = 0;
+
+    // Function to play the next MP3 file
+    function playNext() {
+        if (currentIndex < mp3Files.length) {
+            audioPlayer.src = mp3Files[currentIndex];
+            audioPlayer.play();
+            currentIndex++;
+        } else {
+            console.log('All files played.');
+        }
+    }
+
+    // Set up event listener to play the next file when the current one ends
+    audioPlayer.addEventListener('ended', playNext);
+
+    // Start playback
+    playNext();
+</script>
+</body>
+</html>
